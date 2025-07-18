@@ -1,7 +1,17 @@
-export const NotesContainer = ({ notes }) => {
+import { useSelector } from "react-redux";
+import { Note } from "./Note";
+
+export const NotesContainer = () => {
+  const notes = useSelector((state) => state.notes.notes);
   return (
     <>
-      <h1>Hola soy un notes container</h1>
+      {notes ? (
+        notes.map((note) => (
+          <Note key={note.id} id={note.id} title={note.title} text={note.text} />
+        ))
+      ) : (
+        <>No notes</>
+      )}
     </>
   );
 };
